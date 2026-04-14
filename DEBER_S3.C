@@ -24,5 +24,26 @@ int main(int argc, char const *argv[])
             } while (notas[i][j] < 0 || notas[i][j] > 10);
         }
     }
+    for (i = 0; i < 5; i++) maxE[i] = minE[i] = notas[i][0];
+    for (j = 0; j < 3; j++) maxA[j] = minA[j] = notas[0][j];
+
+    for (i = 0; i < 5; i++) {
+        for (j = 0; j < 3; j++) {
+            promE[i] += notas[i][j];
+            promA[j] += notas[i][j];
+
+            if (notas[i][j] > maxE[i]) maxE[i] = notas[i][j];
+            if (notas[i][j] < minE[i]) minE[i] = notas[i][j];
+
+            if (notas[i][j] > maxA[j]) maxA[j] = notas[i][j];
+            if (notas[i][j] < minA[j]) minA[j] = notas[i][j];
+
+            if (notas[i][j] >= 6) aprobA[j]++; else reproA[j]++;
+        }
+        promE[i] /= 3.0f;
+    }
+    for (j = 0; j < 3; j++) promA[j] /= 5.0f;
+
+
     return 0;
 }
