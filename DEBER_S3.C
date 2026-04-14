@@ -14,7 +14,6 @@ int main(int argc, char const *argv[])
     int aprobA[3] = {0,0,0}, reproA[3] = {0,0,0};
     int i, j;
 
-    /* Ingreso y validación de rango 0..10 */
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 3; j++) {
             do {
@@ -25,44 +24,5 @@ int main(int argc, char const *argv[])
             } while (notas[i][j] < 0 || notas[i][j] > 10);
         }
     }
-
-    /* Inicializar max/min */
-    for (i = 0; i < 5; i++) maxE[i] = minE[i] = notas[i][0];
-    for (j = 0; j < 3; j++) maxA[j] = minA[j] = notas[0][j];
-
-    /* Cálculos */
-    for (i = 0; i < 5; i++) {
-        for (j = 0; j < 3; j++) {
-            promE[i] += notas[i][j];
-            promA[j] += notas[i][j];
-
-            if (notas[i][j] > maxE[i]) maxE[i] = notas[i][j];
-            if (notas[i][j] < minE[i]) minE[i] = notas[i][j];
-
-            if (notas[i][j] > maxA[j]) maxA[j] = notas[i][j];
-            if (notas[i][j] < minA[j]) minA[j] = notas[i][j];
-
-            if (notas[i][j] >= 6) aprobA[j]++; else reproA[j]++;
-        }
-        promE[i] /= 3.0f;
-    }
-    for (j = 0; j < 3; j++) promA[j] /= 5.0f;
-
-    /* Resultados */
-    printf("\nPromedio por estudiante:\n");
-    for (i = 0; i < 5; i++) printf("E%d: %.2f\n", i+1, promE[i]);
-
-    printf("\nPromedio por asignatura:\n");
-    for (j = 0; j < 3; j++) printf("A%d: %.2f\n", j+1, promA[j]);
-
-    printf("\nAlta/Baja por estudiante:\n");
-    for (i = 0; i < 5; i++) printf("E%d -> Alta: %.2f | Baja: %.2f\n", i+1, maxE[i], minE[i]);
-
-    printf("\nAlta/Baja por asignatura:\n");
-    for (j = 0; j < 3; j++) printf("A%d -> Alta: %.2f | Baja: %.2f\n", j+1, maxA[j], minA[j]);
-
-    printf("\nAprobados/Reprobados por asignatura:\n");
-    for (j = 0; j < 3; j++) printf("A%d -> Aprobados: %d | Reprobados: %d\n", j+1, aprobA[j], reproA[j]);
-
     return 0;
 }
