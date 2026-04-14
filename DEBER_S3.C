@@ -9,24 +9,28 @@ Descripcion:Sacar el promedio por estudiantes y asignatura usando matrizes
 int main(int argc, char const *argv[])
 {
 
- float notas[5][3], promE[5] = {0}, promA[3] = {0};
+   float notas[5][3], promE[5] = {0}, promA[3] = {0};
     float maxE[5], minE[5], maxA[3], minA[3];
     int aprobA[3] = {0,0,0}, reproA[3] = {0,0,0};
     int i, j;
 
+    
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 3; j++) {
             do {
-                printf("Nota (0-10) Est%d Asig%d: ", i+1, j+1);
+                printf("Nota (0-10) Estudiante%d Asignatura%d: ", i+1, j+1);
                 scanf("%f", &notas[i][j]);
                 if (notas[i][j] < 0 || notas[i][j] > 10)
                     printf("Fuera del rango.\n");
             } while (notas[i][j] < 0 || notas[i][j] > 10);
         }
     }
+
+    
     for (i = 0; i < 5; i++) maxE[i] = minE[i] = notas[i][0];
     for (j = 0; j < 3; j++) maxA[j] = minA[j] = notas[0][j];
 
+    
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 3; j++) {
             promE[i] += notas[i][j];
@@ -44,6 +48,21 @@ int main(int argc, char const *argv[])
     }
     for (j = 0; j < 3; j++) promA[j] /= 5.0f;
 
+    
+    printf("\nPromedio por estudiante:\n");
+    for (i = 0; i < 5; i++) printf("Estudiante%d: %.2f\n", i+1, promE[i]);
+
+    printf("\nPromedio por asignatura:\n");
+    for (j = 0; j < 3; j++) printf("Asignatura%d: %.2f\n", j+1, promA[j]);
+
+    printf("\nAlta/Baja por estudiante:\n");
+    for (i = 0; i < 5; i++) printf("Estudiante%d -> Alta: %.2f  Baja: %.2f\n", i+1, maxE[i], minE[i]);
+
+    printf("\nAlta/Baja por asignatura:\n");
+    for (j = 0; j < 3; j++) printf("Asignatura%d -> Alta: %.2f  Baja: %.2f\n", j+1, maxA[j], minA[j]);
+
+    printf("\nAprobados/Reprobados por asignatura:\n");
+    for (j = 0; j < 3; j++) printf("Asignatura%d -> Aprobados: %d  Reprobados: %d\n", j+1, aprobA[j], reproA[j]);
 
     return 0;
 }
